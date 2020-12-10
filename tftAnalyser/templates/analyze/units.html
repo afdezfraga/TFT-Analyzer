@@ -1,0 +1,36 @@
+{% extends "analyze/base.html" %}
+{% block content %}
+{% load static %}
+{% if un_list %} 
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Posición</th>
+      <th scope="col">Icono</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Partidas</th>
+      <th scope="col">Victorias</th>
+      <th scope="col">Derrotas</th>
+      <th scope="col">Top 4</th>
+      <th scope="col">Media</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for u in un_list %}
+    <tr>
+      <th class="align-middle" scope="row">{{ u.place }}</th>
+      <td class="align-middle"><img id="unitImage" src="{% static '/analyze/images/units/' %}{{u.id}}.png" alt="{{u.name}}" class="rounded" height="48" width="48"></td>
+      <td class="align-middle">{{ u.name }}</a></td>
+      <td class="align-middle">{{ u.games }}</td>
+      <td class="align-middle">{{ u.first }}</td>
+      <td class="align-middle">{{ u.losses }}</td>
+      <td class="align-middle">{{ u.top4 }}</td>
+      <td class="align-middle">{{ u.mean|floatformat:2 }}</td>
+    </tr>
+{% endfor %} 
+  </tbody>
+</table>
+{% else %}
+<p>No se encontraron unidades en este momento</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "analyze/base.html" %}
+{% block content %}
+<!--{% if count %}-->
+<!--{% endif %}-->
+{% if top_list %} 
+<table class="table table-striped table-hover" id="my_info_table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Rank</th>
+      <th scope="col">Name</th>
+      <th scope="col">Points</th>
+      <th scope="col">Wins</th>
+      <th scope="col">Losses</th>
+      <th scope="col">Winrate</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for s in top_list %}
+    <tr>
+      <th scope="row">{{ s.place }}</th>
+      <td><a href= "../user/{{ s.name }}">{{ s.name }}</a></td>
+      <td>{{ s.league_points }}</td>
+      <td>{{ s.wins }}</td>
+      <td>{{ s.losses }}</td>
+      <td>{{ s.winrate|floatformat:2 }}%</td>
+    </tr>
+{% endfor %} 
+  </tbody>
+</table>
+<input id="count" name="count" type="hidden" value="20">
+<button onclick="ejecutarAJAX()" id="ajax_button" >Hazme Click</button>
+{% else %}
+<p>No se encontraron challengers en este momento</p>
+{% endif %}
+{% endblock %}

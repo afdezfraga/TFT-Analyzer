@@ -1,0 +1,31 @@
+{% extends "analyze/base.html" %}
+{% block content %}
+{% if user.is_authenticated and favorite_list %}
+<table class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Puntos</th>
+      <th scope="col">Victorias</th>
+      <th scope="col">Derrotas</th>
+      <th scope="col">Tasa de victorias</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for s in favorite_list %}
+    <tr>
+      <td><a href= "../user/{{ s.name }}">{{ s.name }}</a></td>
+      <td>{{ s.league_points }}</td>
+      <td>{{ s.wins }}</td>
+      <td>{{ s.losses }}</td>
+      <td>{{ s.winrate|floatformat:2 }}%</td>
+    </tr>
+{% endfor %} 
+  </tbody>
+</table>
+{% elif user.is_authenticated %}
+<p>La lista de favoritos está vacía</p>
+{% else %}
+<p>Debes iniciar sesión para poder utilizar la lista de favoritos</p>
+{% endif %}
+{% endblock %}
